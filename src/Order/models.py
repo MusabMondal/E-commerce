@@ -25,7 +25,6 @@ class Item(models.Model):
     label = models.CharField(choices=LABEL_CHOICES, max_length=1,default='P')
     slug = models.SlugField(unique = True,blank=True)
     description = models.TextField(default='A Shirt')
-    quantity = models.IntegerField(default=1)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -39,9 +38,17 @@ class Item(models.Model):
         return reverse("product", kwargs = {
             'slug': self.slug
         })
+    
+    def add_to_cart_url(self):
+        return reverse("add_to_cart", kwargs = {
+            'slug': self.slug
+        })
 
 class OrderItems(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    ordered = models.BooleanField(default=False)
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
