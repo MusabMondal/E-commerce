@@ -1,67 +1,64 @@
-<!-- Navbar -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
-<!-- Container wrapper -->
-<div class="container">    
-    <!-- Toggle button -->
-    <button
-    class="navbar-toggler"
-    type="button"
-    data-mdb-toggle="collapse"
-    data-mdb-target="#navbarSupportedContent1"
-    aria-controls="navbarSupportedContent1"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-    >
-    <i class="fas fa-bars"></i>
-    </button>
+{% load cart_template_tags %}
 
-    <!-- Collapsible wrapper -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent1">      
-    <!-- Navbar brand -->
-    <a class="navbar-brand mt-2 mt-sm-0" href="https://mdbootstrap.com/">
-        <img
-        src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-        height="20"
-        alt="MDB Logo"
-        loading="lazy"
-        />
-    </a>
-    <!-- Left links -->
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item active">
-        <a class="nav-link " href="{% url 'home_page' %}">Home</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="{% url 'checkout' %}">Check Out</a>
-        </li>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <div class="container">
 
-    </ul>
-    <!-- Left links -->      
-    </div>
-    <!-- Collapsible wrapper -->
-    
-    <!-- Right elements -->
-    <div class="d-flex align-items-center">
-    <!-- Icon -->
-    <a class="nav-link me-3" href="#">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="badge rounded-pill badge-notification bg-danger">1</span>
-    </a>
+      <!-- Brand -->
+      <a class="navbar-brand waves-effect" href="/">
+        <strong class="blue-text">DJe-commerce</strong>
+      </a>
 
-    <a class="nav-link me-3" href="#">
-        <i class="fab fa-facebook-f"></i>
-    </a>
-    <a class="nav-link me-3" href="#">
-        <i class="fab fa-twitter"></i>
-    </a>
-    <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="border rounded px-2 nav-link"
-            target="_blank">
-            <i class="fab fa-github me-2"></i>MDB GitHub
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+          {% comment %} <li class="nav-item active">
+            <a class="nav-link waves-effect" href="/">Home
+              <span class="sr-only">(current)</span>
             </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="/checkout">
+            Checkout</a>
+          </li> {% endcomment %}
+        </ul>
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a href="" class="nav-link waves-effect">
+              <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
+              <i class="fas fa-shopping-cart"></i>
+              <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Logout </span>
+            </a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Login </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Signup </span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+
     </div>
-    <!-- Right elements -->
-    
-</div>
-<!-- Container wrapper -->
-</nav>
-<!-- Navbar -->
+  </nav>

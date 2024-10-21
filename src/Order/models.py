@@ -43,6 +43,11 @@ class Item(models.Model):
         return reverse("add_to_cart", kwargs = {
             'slug': self.slug
         })
+    
+    def remove_from_cart_url(self):
+        return reverse('remove_from_cart', kwargs = {
+            'slug': self.slug
+        })
 
 class OrderItems(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -59,4 +64,4 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.username
-    pass
+    

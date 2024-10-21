@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     # Third party apps
     'allauth',
     'allauth.account',
+    'crispy_forms',
+    'crispy_bootstrap4',
 
     # Optional -- requires install using `django-allauth[socialaccount]`.
     'allauth.socialaccount',
@@ -89,6 +91,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Ecommerce.wsgi.application'
+
+LOGIN_REDIRECT_URL = '/'
+
+# CRISPY FORMS
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 # Database
